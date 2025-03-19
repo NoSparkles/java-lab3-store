@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "type": "Mouse",
+        "name": "Gaming Mouse",
+        "price": 25.99,
+        "description": "High DPI gaming mouse",
+        "details": {
+            "type": "Optical",
+            "dpi": 16000
+        }
+    },
+    {
+        "id": 2,
+        "type": "Keyboard",
+        "name": "Mechanical Keyboard",
+        "price": 89.99,
+        "description": "RGB mechanical keyboard",
+        "details": {
+            "layout": "QWERTY",
+            "isMechanical": true
+        }
+    },
+    {
+        "id": 3,
+        "type": "Monitor",
+        "name": "4K Monitor",
+        "price": 299.99,
+        "description": "Ultra HD monitor",
+        "details": {
+            "screenSize": 27,
+            "resolution": "3840x2160"
+        }
+    },
+    {
+        "id": 4,
+        "type": "MousePad",
+        "name": "Gaming Mouse Pad",
+        "price": 14.99,
+        "description": "Large gaming mouse pad",
+        "details": {
+            "material": "Fabric",
+            "isGaming": true
+        }
+    },
+    {
+        "id": 5,
+        "type": "Cable",
+        "name": "HDMI Cable",
+        "price": 9.99,
+        "description": "High-speed HDMI cable",
+        "details": {
+            "type": "HDMI",
+            "length": 1.8
+        }
+    }
+]
