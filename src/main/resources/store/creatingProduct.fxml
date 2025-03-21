@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="store.CreatingProductController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="558.0" layoutY="301.0" prefHeight="299.0" prefWidth="485.0" spacing="10.0">
+      <VBox alignment="TOP_CENTER" layoutX="558.0" layoutY="300.0" prefHeight="299.0" prefWidth="485.0" spacing="10.0">
          <children>
             <Label alignment="TOP_LEFT" text="Create new product">
                <VBox.margin>
@@ -25,19 +25,19 @@
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="485.0" spacing="10.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="40.0" text="Name:" />
-                  <TextField fx:id="name" prefHeight="25.0" prefWidth="328.0" />
+                  <TextField fx:id="name" onKeyTyped="#nameOnTyped" prefHeight="25.0" prefWidth="328.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="485.0" spacing="10.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="40.0" text="Price:" />
-                  <TextField fx:id="price" prefHeight="25.0" prefWidth="324.0" />
+                  <TextField fx:id="price" onInputMethodTextChanged="#priceOnExit" onKeyTyped="#priceOnTyped" prefHeight="25.0" prefWidth="324.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="485.0" spacing="10.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="63.0" text="Description:" />
-                  <TextField fx:id="description" prefHeight="25.0" prefWidth="304.0" />
+                  <TextField fx:id="description" onKeyTyped="#descriptionOnTyped" prefHeight="25.0" prefWidth="304.0" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
@@ -53,13 +53,13 @@
                         <HBox prefHeight="17.0" prefWidth="445.0" spacing="10.0">
                            <children>
                               <Label fx:id="labelDetails1" text="Brand:" />
-                              <TextField fx:id="textFieldDetails1" prefHeight="25.0" prefWidth="334.0" />
+                              <TextField fx:id="textFieldDetails1" onKeyTyped="#details1OnTyped" prefHeight="25.0" prefWidth="334.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="445.0" spacing="10.0">
                            <children>
                               <Label fx:id="labelDetails2" text="Color:" />
-                              <TextField fx:id="textFieldDetails2" prefHeight="25.0" prefWidth="337.0" />
+                              <TextField fx:id="textFieldDetails2" onKeyTyped="#details2OnTyped" prefHeight="25.0" prefWidth="337.0" />
                            </children>
                         </HBox>
                         <Button fx:id="createButton" mnemonicParsing="false" onAction="#createButtonOnAction" text="Create" />

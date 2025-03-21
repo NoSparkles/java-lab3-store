@@ -42,11 +42,60 @@ public class CreatingProductController {
         this.productType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             this.productTypeOnChange(newValue);
         });
+
+        this.price.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                this.priceOnExit();
+            }
+        });
     }
 
     @FXML
     public void nameOnTyped() {
-        
+        String validatedText = validateStringField(this.name.getText(), 30);
+        this.name.setText(validatedText);
+        this.name.positionCaret(validatedText.length());
+    }
+
+    @FXML
+    public void priceOnTyped() {
+        String validatedText = validateDoubleField(this.price.getText());
+        this.price.setText(validatedText);
+        this.price.positionCaret(validatedText.length());
+    }
+
+    public void priceOnExit() {
+        try {
+            double num = Double.parseDouble(this.price.getText());
+            this.price.setText(String.valueOf(Math.round(num * 100.0) / 100.0));
+        } catch (NumberFormatException e) { }
+    }
+
+    @FXML
+    public void descriptionOnTyped() {
+        String validatedText = validateStringField(this.description.getText(), 30);
+        this.description.setText(validatedText);
+        this.description.positionCaret(validatedText.length());
+    }
+
+    @FXML
+    public void details1OnTyped() {
+        String validatedText = validateStringField(this.textFieldDetails1.getText(), 30);
+        this.textFieldDetails1.setText(validatedText);
+        this.textFieldDetails1.positionCaret(validatedText.length());
+    }
+
+    @FXML
+    public void details2OnTyped() {
+        String validatedText;
+        if (this.productType.getValue().equals("Mouse")) {
+            validatedText = validateIntField(this.textFieldDetails2.getText());
+        }
+        else {
+            validatedText = validateStringField(this.textFieldDetails2.getText(), 30);
+        }
+        this.textFieldDetails2.setText(validatedText);
+        this.textFieldDetails2.positionCaret(validatedText.length());
     }
     
     @FXML
@@ -65,6 +114,55 @@ public class CreatingProductController {
             e.printStackTrace(); // Handle exceptions (e.g., FXML file not found)
         }
     }
+
+    private String validateStringField(String value, int max) {
+        if (value.length() == 0) {
+            return "";
+        }
+        if (value.length() > max) {
+            return value.substring(0, max);
+        }
+        return value;
+    }
+
+    private String validateIntField(String value) {
+        if (value.length() == 0) {
+            return "";
+        }
+        try {
+            int num = Integer.parseInt(value);
+            if (num < 0) {
+                return "0";
+            }
+            else if (num > 1000000) {
+                return "1000000";
+            }
+        }
+        catch (NumberFormatException exception) {
+            return "";
+        }
+        return value;
+    }
+
+    private String validateDoubleField(String value) {
+        if (value.length() == 0) {
+            return "";
+        }
+        try {
+            double num = Double.parseDouble(value);
+            if (num < 0) {
+                return "0";
+            } else if (num > 1000000) {
+                return "1000000";
+            }
+        }
+        catch (NumberFormatException exception) {
+            return "";
+        }
+        return value;
+    }
+    
+    
 
     private void productTypeOnChange(String value) {
         switch (value) {
