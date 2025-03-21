@@ -14,9 +14,7 @@ import store.App;
 
 public abstract class Product {
     public enum Type {
-        Cable,
         Keyboard,
-        Monitor,
         Mouse,
         Mousepad;
     }
@@ -99,35 +97,21 @@ public abstract class Product {
             JSONObject details = productJson.getJSONObject("details");
 
             switch (type) {
+                case "Keyboard":
+                    String keyboardBrand = details.getString("brand");
+                    String color = details.getString("color");
+                    products.add(new Keyboard(name, price, description, keyboardBrand, color));
+                    break;
                 case "Mouse":
                     String mouseType = details.getString("type");
                     int dpi = details.getInt("dpi");
                     products.add(new Mouse(name, price, description, mouseType, dpi));
                     break;
-
-                case "Keyboard":
-                    boolean isMechanical = details.getBoolean("isMechanical");
-                    products.add(new Keyboard(name, price, description, isMechanical));
-                    break;
-
-                case "Monitor":
-                    int screenSize = details.getInt("screenSize");
-                    String resolution = details.getString("resolution");
-                    products.add(new Monitor(name, price, description, screenSize, resolution));
-                    break;
-
                 case "MousePad":
+                    String mousePadBrand = details.getString("brand");
                     String material = details.getString("material");
-                    boolean isGaming = details.getBoolean("isGaming");
-                    products.add(new MousePad(name, price, description, material, isGaming));
+                    products.add(new MousePad(name, price, description, mousePadBrand, material));
                     break;
-
-                case "Cable":
-                    String cableType = details.getString("type");
-                    double length = details.getDouble("length");
-                    products.add(new Cable(name, price, description, cableType, length));
-                    break;
-
                 default:
                     throw new IllegalArgumentException("Unknown product type: " + type);
             }

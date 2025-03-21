@@ -1,16 +1,18 @@
 package store.product;
 
 public class Keyboard extends Product {
-    private boolean isMechanical;
+    private String brand;
+    private String color;
 
-    public Keyboard(String name, double price, String description, boolean isMechanical) {
+    public Keyboard(String name, double price, String description, String brand, String color) {
         super(name, price, Type.Keyboard, description);
-        this.isMechanical = isMechanical;
+        this.brand = brand;
+        this.color = color;
     }
 
     @Override
     public String getDetails() {
-        return "Mechanical: " + (this.isMechanical ? "Yes" : "No");
+        return "Brand: " + this.brand + ", Color: " + this.color;
     }
 }
 

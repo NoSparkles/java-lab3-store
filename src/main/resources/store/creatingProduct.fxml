@@ -2,57 +2,72 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="store.CreatingProductController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="565.0" layoutY="103.0" prefHeight="748.0" prefWidth="485.0" spacing="10.0">
+      <VBox alignment="TOP_CENTER" layoutX="558.0" layoutY="301.0" prefHeight="299.0" prefWidth="485.0" spacing="10.0">
          <children>
-            <Label alignment="TOP_CENTER" text="Create new product">
+            <Label alignment="TOP_LEFT" text="Create new product">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="485.0" spacing="10.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="40.0" text="Name:" />
-                  <TextField prefHeight="25.0" prefWidth="403.0" />
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="328.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="485.0" spacing="10.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="40.0" text="Price:" />
-                  <TextField prefHeight="25.0" prefWidth="403.0" />
+                  <TextField fx:id="price" prefHeight="25.0" prefWidth="324.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="485.0" spacing="10.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="63.0" text="Description:" />
-                  <TextField prefHeight="25.0" prefWidth="372.0" />
+                  <TextField fx:id="description" prefHeight="25.0" prefWidth="304.0" />
                </children>
             </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="485.0" spacing="10.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="40.0" text="Type:" />
-                        <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="396.0" text="Select type">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Cable" />
-                            <MenuItem mnemonicParsing="false" text="Keyboard" />
-                              <MenuItem mnemonicParsing="false" text="Monitor" />
-                              <MenuItem mnemonicParsing="false" text="Mouse" />
-                              <MenuItem mnemonicParsing="false" text="Mousepad" />
-                          </items>
-                        </MenuButton>
+                        <ChoiceBox fx:id="productType" prefWidth="150.0" />
                      </children>
                   </HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="17.0" prefWidth="445.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="labelDetails1" text="Brand:" />
+                              <TextField fx:id="textFieldDetails1" prefHeight="25.0" prefWidth="334.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="445.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="labelDetails2" text="Color:" />
+                              <TextField fx:id="textFieldDetails2" prefHeight="25.0" prefWidth="337.0" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#createButtonOnAction" text="Create" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
                </children>
             </VBox>
          </children>

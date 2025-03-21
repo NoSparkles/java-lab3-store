@@ -19,14 +19,13 @@ public class PrimaryController {
     private Button switchButton;
     @FXML
     private Button addProductButton;
-
-    private final PrimaryControllerState state = PrimaryControllerState.getInstance();
-
     @FXML
     private GridPane productGrid;
 
+    private final PrimaryControllerState state = PrimaryControllerState.getInstance();
     private boolean isAdmin;
 
+    @FXML
     public void initialize() {
         this.restoreState();
         List<Product> products;
