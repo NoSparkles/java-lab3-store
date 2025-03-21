@@ -1,8 +1,8 @@
 package store.product;
 
 public class Keyboard extends Product {
-    private String brand;
-    private String color;
+    private final String brand;
+    private final String color;
 
     public Keyboard(String name, double price, String description, String brand, String color) {
         super(name, price, Type.Keyboard, description);

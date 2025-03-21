@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "type": "Mouse",
+        "productType": "Mouse",
         "name": "Gaming Mouse",
         "price": 25.99,
         "description": "High DPI gaming mouse",
@@ -12,7 +12,7 @@
     },
     {
         "id": 2,
-        "type": "Keyboard",
+        "productType": "Keyboard",
         "name": "Mechanical Keyboard",
         "price": 89.99,
         "description": "RGB mechanical keyboard",
@@ -23,7 +23,7 @@
     },
     {
         "id": 3,
-        "type": "MousePad",
+        "productType": "MousePad",
         "name": "Gaming Mouse Pad",
         "price": 14.99,
         "description": "Large gaming mouse pad",

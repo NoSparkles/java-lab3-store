@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import store.product.Product;
+import store.product.ProductInventory;
 
 public class PrimaryController {
     @FXML
@@ -22,17 +23,20 @@ public class PrimaryController {
     @FXML
     private GridPane productGrid;
 
+    private final ProductInventory inventory = ProductInventory.getInstance();
+    private List<Product> products;
+
     private final PrimaryControllerState state = PrimaryControllerState.getInstance();
     private boolean isAdmin;
 
     @FXML
     public void initialize() {
         this.restoreState();
-        List<Product> products;
+        this.inventory.setResourcePath("products.json");
 
         try {
             // Load the products from JSON
-            products = Product.getProductsFromJson("products.json");
+            this.products = inventory.getProducts();
         } catch (Exception e) {
             System.out.println("Couldn't load the products.");
             e.printStackTrace();
@@ -50,7 +54,7 @@ public class PrimaryController {
             // Add labels for product details
             Label nameLabel = new Label("Name: " + product.getName());
             Label priceLabel = new Label("Price: $" + product.getPrice());
-            Label typeLabel = new Label("Type: " + product.getType());
+            Label typeLabel = new Label("ProductType: " + product.getProductType());
             Label detailsLabel = new Label("Details: " + product.getDetails());
 
             // Add the labels to the VBox

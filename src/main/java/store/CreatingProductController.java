@@ -43,6 +43,11 @@ public class CreatingProductController {
             this.productTypeOnChange(newValue);
         });
     }
+
+    @FXML
+    public void nameOnTyped() {
+        
+    }
     
     @FXML
     public void goBackButtonOnAction() {
@@ -81,6 +86,6 @@ public class CreatingProductController {
 
     @FXML
     public void createButtonOnAction() {
-        
+
     }
 }

@@ -1,8 +1,8 @@
 package store.product;
 
 public class MousePad extends Product {
-    private String brand;
-    private String material;
+    private final String brand;
+    private final String material;
 
     public MousePad(String name, double price, String description, String brand, String material) {
         super(name, price, Type.Mousepad, description);
