@@ -32,7 +32,6 @@ public class PrimaryController {
     @FXML
     public void initialize() {
         this.restoreState();
-        this.inventory.setResourcePath("products.json");
 
         try {
             // Load the products from JSON

@@ -4,7 +4,7 @@ public abstract class Product {
     public enum Type {
         Keyboard,
         Mouse,
-        Mousepad;
+        MousePad;
     }
     private static int nextId;
     private int id;

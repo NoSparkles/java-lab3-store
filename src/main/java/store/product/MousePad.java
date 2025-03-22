@@ -5,7 +5,7 @@ public class MousePad extends Product {
     private final String material;
 
     public MousePad(String name, double price, String description, String brand, String material) {
-        super(name, price, Type.Mousepad, description);
+        super(name, price, Type.MousePad, description);
         this.brand = brand;
         this.material = material;
     }

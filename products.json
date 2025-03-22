@@ -1,0 +1,112 @@
+[
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Color": "-"
+        },
+        "id": 1,
+        "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Color": "-"
+        },
+        "id": 2,
+        "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Color": "-"
+        },
+        "id": 3,
+        "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Material": "-"
+        },
+        "id": 4,
+        "productType": "MousePad"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Material": "-"
+        },
+        "id": 5,
+        "productType": "MousePad"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "0"
+        },
+        "id": 6,
+        "productType": "Mouse"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "0"
+        },
+        "id": 7,
+        "productType": "Mouse"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Color": "-"
+        },
+        "id": 8,
+        "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Color": "-"
+        },
+        "id": 9,
+        "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "0"
+        },
+        "id": 19,
+        "productType": "Mouse"
+    }
+]

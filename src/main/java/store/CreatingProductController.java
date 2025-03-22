@@ -12,6 +12,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import store.product.Product;
+import store.product.ProductFactory;
+import store.product.ProductInventory;
 
 public class CreatingProductController {
     @FXML
@@ -34,6 +37,8 @@ public class CreatingProductController {
     private TextField textFieldDetails2;
     @FXML
     private Button createButton;
+
+    private final ProductInventory inventory = ProductInventory.getInstance();
 
     @FXML
     public void initialize() {
@@ -165,6 +170,8 @@ public class CreatingProductController {
     
 
     private void productTypeOnChange(String value) {
+        this.textFieldDetails1.setText("");
+        this.textFieldDetails2.setText("");
         switch (value) {
             case "Keyboard":
                 this.labelDetails1.setText("Brand:");
@@ -185,5 +192,40 @@ public class CreatingProductController {
     @FXML
     public void createButtonOnAction() {
 
+        setTextFieldDefaultValue(this.name, "Unknown");
+        setTextFieldDefaultValue(this.price, "0.01");
+        setTextFieldDefaultValue(this.description, "-");
+        setTextFieldDefaultValue(this.textFieldDetails1, "-");
+        if (this.productType.getValue().equals("Mouse")) {
+            setTextFieldDefaultValue(this.textFieldDetails2, "0");
+        }
+        else {
+            setTextFieldDefaultValue(this.textFieldDetails2, "-");
+        }
+        
+
+        Product product = ProductFactory.createProduct(
+            this.name.getText(),
+            this.productType.getValue(), 
+            Double.parseDouble(this.price.getText()),
+            this.description.getText(),
+            this.textFieldDetails1.getText(), 
+            this.textFieldDetails2.getText()
+        );
+
+
+        System.out.println(product.getName());
+        System.out.println(product.getProductType());
+        System.out.println(product.getPrice());
+        System.out.println(product.getDescription());
+        System.out.println(product.getDetails());
+
+        this.inventory.addProductToJson(product);
+    }
+
+    void setTextFieldDefaultValue(TextField textField, String value) {
+        if (textField.getText().strip().length() == 0) {
+            textField.setText(value);
+        }
     }
 }

@@ -1,6 +1,10 @@
 package store.product;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -13,17 +17,13 @@ import org.json.JSONObject;
 import store.App;
 
 public class ProductInventory {
-    // Singleton instance
     private static ProductInventory instance;
+    private final String filePath = "products.json"; // Writable file path
 
-    // Path to the JSON resource
-    private String resourcePath;
-
-    // Private constructor to prevent instantiation
     private ProductInventory() {
+        initializeFile();
     }
 
-    // Public method to access the singleton instance
     public static synchronized ProductInventory getInstance() {
         if (instance == null) {
             instance = new ProductInventory();
@@ -31,78 +31,113 @@ public class ProductInventory {
         return instance;
     }
 
-    // Set the resource path for the JSON file
-    public void setResourcePath(String resourcePath) {
-        this.resourcePath = resourcePath;
+    // Ensure the JSON file exists
+    private void initializeFile() {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try (InputStream resourceStream = App.class.getResourceAsStream("/store/product/products.json");
+                 FileOutputStream outputStream = new FileOutputStream(file)) {
+                if (resourceStream == null) {
+                    throw new IllegalArgumentException("Resource file not found!");
+                }
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = resourceStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+            } catch (Exception e) {
+                System.err.println("Failed to initialize file: " + e.getMessage());
+            }
+        }
     }
 
-    // Load products from JSON
-    private List<Product> loadProductsFromJson() throws Exception {
+    // Load products from JSON file
+    public synchronized List<Product> getProducts() {
         List<Product> products = new ArrayList<>();
-
-        if (resourcePath == null || resourcePath.isEmpty()) {
-            throw new IllegalArgumentException("Resource path not set.");
-        }
-
-        // Load the file as a resource stream
-        InputStream resourceStream = App.class.getResourceAsStream(resourcePath);
-        if (resourceStream == null) {
-            throw new IllegalArgumentException("File not found: " + resourcePath);
-        }
-
-        // Read the file content
-        StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
+            StringBuilder content = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
                 content.append(line);
             }
-        }
 
-        // Parse the JSON data
-        JSONArray jsonArray = new JSONArray(content.toString());
-        Product.setNextId(jsonArray.length());
+            // Parse JSON and populate product list
+            JSONArray jsonArray = new JSONArray(content.toString());
+            Product.setNextId(jsonArray.length());
 
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject productJson = jsonArray.getJSONObject(i);
-            String productType = productJson.getString("productType");
-            String name = productJson.getString("name");
-            double price = productJson.getDouble("price");
-            String description = productJson.getString("description");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject productJson = jsonArray.getJSONObject(i);
+                String productType = productJson.getString("productType");
+                String name = productJson.getString("name");
+                double price = productJson.getDouble("price");
+                String description = productJson.getString("description");
 
-            JSONObject details = productJson.getJSONObject("details");
+                JSONObject details = productJson.getJSONObject("details");
 
-            switch (productType) {
-                case "Keyboard":
-                    String keyboardBrand = details.getString("brand");
-                    String color = details.getString("color");
-                    products.add(new Keyboard(name, price, description, keyboardBrand, color));
-                    break;
-                case "Mouse":
-                    String mouseType = details.getString("type");
-                    int dpi = details.getInt("dpi");
-                    products.add(new Mouse(name, price, description, mouseType, dpi));
-                    break;
-                case "MousePad":
-                    String mousePadBrand = details.getString("brand");
-                    String material = details.getString("material");
-                    products.add(new MousePad(name, price, description, mousePadBrand, material));
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown product type: " + productType);
+                switch (productType) {
+                    case "Keyboard":
+                        String keyboardBrand = details.getString("Brand");
+                        String color = details.getString("Color");
+                        products.add(new Keyboard(name, price, description, keyboardBrand, color));
+                        break;
+                    case "Mouse":
+                        String mouseType = details.getString("Type");
+                        int dpi = details.getInt("DPI");
+                        products.add(new Mouse(name, price, description, mouseType, dpi));
+                        break;
+                    case "MousePad":
+                        String mousePadBrand = details.getString("Brand");
+                        String material = details.getString("Material");
+                        products.add(new MousePad(name, price, description, mousePadBrand, material));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown product type: " + productType);
+                }
             }
+        } catch (Exception e) {
+            System.err.println("Failed to load products: " + e.getMessage());
         }
-
         return products;
     }
 
-    // Get products while synchronizing with JSON
-    public synchronized List<Product> getProducts() {
+    // Add a product to the JSON file
+    public synchronized void addProductToJson(Product product) {
         try {
-            return loadProductsFromJson();
+            // Read existing JSON content
+            StringBuilder content = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line);
+                }
+            }
+
+            // Parse JSON and add new product
+            JSONArray jsonArray = new JSONArray(content.toString());
+            JSONObject productJson = new JSONObject();
+            productJson.put("id", product.getId());
+            productJson.put("productType", product.getProductType().toString());
+            productJson.put("name", product.getName());
+            productJson.put("price", product.getPrice());
+            productJson.put("description", product.getDescription());
+
+            // Parse product details
+            JSONObject detailsJson = new JSONObject();
+            String[] detailsPairs = product.getDetails().split(", ");
+            for (String pair : detailsPairs) {
+                String[] keyValue = pair.split(": ");
+                detailsJson.put(keyValue[0].trim(), keyValue[1].trim());
+            }
+            productJson.put("details", detailsJson);
+
+            // Append to the array and save back
+            jsonArray.put(productJson);
+            try (FileWriter writer = new FileWriter(filePath, StandardCharsets.UTF_8)) {
+                writer.write(jsonArray.toString(4)); // Pretty print with 4-space indentation
+            }
+
         } catch (Exception e) {
-            System.err.println("Failed to load products: " + e.getMessage());
-            return new ArrayList<>();
+            System.err.println("Failed to add product: " + e.getMessage());
         }
     }
 }
