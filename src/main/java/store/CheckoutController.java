@@ -13,11 +13,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import store.order.BasicOrder;
 import store.order.Customization;
 import store.order.Order;
 import store.order.Packaging;
+import store.payment.CardStrategy;
+import store.payment.PayPalStrategy;
+import store.payment.PaymentStrategy;
 import store.product.Product;
 
 public class CheckoutController {
@@ -36,14 +40,19 @@ public class CheckoutController {
     @FXML
     private CheckBox customization;
     @FXML
-    private ChoiceBox<String> paymentMethod;
-    @FXML
     private TextField quantity;
     @FXML
     private Label orderDescription;
+    @FXML
+    private ChoiceBox<String> paymentMethod;
+    @FXML
+    private VBox paymentBox;
+    @FXML 
+    private Label feedbackLabel;
 
     private Product product;
     private Order order;
+    private PaymentStrategy paymentStrategy;
 
     public void setProduct(Product product) {
         this.product = product;
@@ -55,6 +64,12 @@ public class CheckoutController {
     public void initialize() {
         this.paymentMethod.setItems(FXCollections.observableArrayList("Card", "PayPal"));
         this.paymentMethod.setValue("Card");
+        this.paymentMethod.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.changePaymentMethod(newValue);
+        });
+
+        this.paymentStrategy = new CardStrategy();
+        this.paymentStrategy.addPaymentFields(this.paymentBox);
         this.quantity.setText("1");
     }
 
@@ -120,6 +135,16 @@ public class CheckoutController {
         this.adjustOrder();
     }
 
+    private void changePaymentMethod(String value) {
+        if (value.equals("Card")) {
+            this.paymentStrategy = new CardStrategy();
+        }
+        else {
+            this.paymentStrategy = new PayPalStrategy();
+        }
+        this.paymentStrategy.addPaymentFields(this.paymentBox);
+    }
+
     private void adjustOrder() {
         int quantityInt;
         if (this.quantity.getText().length() == 0) {
@@ -143,6 +168,9 @@ public class CheckoutController {
 
     @FXML 
     public void buyButtonOnAction() {
-        
+        if (this.quantity.getText().length() == 0) {
+            this.quantity.setText("1");
+        }
+        this.paymentStrategy.buy(this.feedbackLabel);
     }
 }

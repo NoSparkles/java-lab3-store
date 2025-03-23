@@ -119,5 +119,38 @@
         },
         "id": 21,
         "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Color": "-"
+        },
+        "id": 23,
+        "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "0"
+        },
+        "id": 24,
+        "productType": "Mouse"
+    },
+    {
+        "price": 432.23,
+        "name": "Unknown",
+        "description": "-fa",
+        "details": {
+            "Brand": "fdasfads",
+            "Material": "fdas"
+        },
+        "id": 25,
+        "productType": "MousePad"
     }
 ]

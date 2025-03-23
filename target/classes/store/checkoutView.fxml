@@ -50,12 +50,6 @@
             </VBox>
             <CheckBox fx:id="packaging" mnemonicParsing="false" onAction="#packagingOnAction" text="Packaging (+0.50$)" />
             <CheckBox fx:id="customization" mnemonicParsing="false" onAction="#packagingOnAction" text="Customization (+1.00$)" />
-            <Label text="Pay with:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="paymentMethod" prefWidth="150.0" />
             <HBox prefHeight="26.0" prefWidth="520.0">
                <children>
                   <Label text="Quantity: " />
@@ -67,7 +61,15 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" text="Buy" />
+            <Label text="Pay with:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="paymentMethod" prefWidth="150.0" />
+            <VBox fx:id="paymentBox" prefHeight="7.0" prefWidth="520.0" />
+            <Button mnemonicParsing="false" onAction="#buyButtonOnAction" text="Buy" />
+            <Label fx:id="feedbackLabel" wrapText="true" />
          </children>
          <opaqueInsets>
             <Insets />
