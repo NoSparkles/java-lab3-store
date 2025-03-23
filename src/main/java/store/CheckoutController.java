@@ -43,6 +43,7 @@ public class CheckoutController {
     private Label orderDescription;
 
     private Product product;
+    private Order order;
 
     public void setProduct(Product product) {
         this.product = product;
@@ -113,6 +114,7 @@ public class CheckoutController {
 
     private void setFields() {
         this.name.setText(this.product.getName());
+        this.productType.setText(this.product.getProductType().toString());
         this.price.setText(String.valueOf(this.product.getPrice()));
         this.description.setText(this.product.getDescription());
         this.adjustOrder();
@@ -126,16 +128,21 @@ public class CheckoutController {
         else {
             quantityInt = Integer.parseInt(this.quantity.getText());
         }
-        Order order = new BasicOrder(this.product, quantityInt);
+        this.order = new BasicOrder(this.product, quantityInt);
 
         if (this.packaging.isSelected()) {
-            order = new Packaging(order);
+            this.order = new Packaging(this.order);
         }
         if (this.customization.isSelected()) {
-            order = new Customization(order);
+            this.order = new Customization(this.order);
         }
 
         this.orderDescription.setText(order.getDescription());
         this.price.setText(String.valueOf(Math.round(order.getCost() * 100.0) / 100.0));
+    }
+
+    @FXML 
+    public void buyButtonOnAction() {
+        
     }
 }
