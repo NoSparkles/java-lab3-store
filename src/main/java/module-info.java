@@ -5,4 +5,6 @@ module store {
     
     opens store to javafx.fxml;
     exports store;
+    exports store.product;
+    exports store.order;
 }

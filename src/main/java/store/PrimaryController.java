@@ -45,7 +45,7 @@ public class PrimaryController {
         // Populate the GridPane with product data
         int row = 0; // Start at the first row
         int column = 0; // Start at the first column
-        for (Product product : products) {
+        for (Product product : this.products) {
             // Create a VBox for each product
             VBox productBox = new VBox();
             //productBox.setSpacing(5); // Add some spacing between elements
@@ -58,6 +58,10 @@ public class PrimaryController {
 
             // Add the labels to the VBox
             productBox.getChildren().addAll(nameLabel, priceLabel, typeLabel, detailsLabel);
+
+            productBox.setOnMousePressed(event -> {
+                this.changeToCheckoutView(product);
+            });        
 
             // Add the VBox to the GridPane
             productGrid.add(productBox, column, row);
@@ -93,15 +97,15 @@ public class PrimaryController {
     public void addProductButtonOnAction() {
         this.saveState();
         try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("creatingProduct.fxml"));
-        Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("creatingProduct.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) this.addProductButton.getScene().getWindow();
+            Stage stage = (Stage) this.addProductButton.getScene().getWindow();
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
 
-        stage.show();
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace(); // Handle exceptions (e.g., FXML file not found)
         }
@@ -117,5 +121,25 @@ public class PrimaryController {
         this.isAdmin = false;
         this.addProductButton.setVisible(false);
         this.switchButton.setText("Switch to admin");
+    }
+
+    private void changeToCheckoutView(Product product) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("checkoutView.fxml"));
+
+            Parent root = loader.load();
+
+            CheckoutController controller = loader.getController();
+            controller.setProduct(product);
+
+            Stage stage = (Stage) this.productGrid.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

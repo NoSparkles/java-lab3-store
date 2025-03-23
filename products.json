@@ -108,5 +108,16 @@
         },
         "id": 19,
         "productType": "Mouse"
+    },
+    {
+        "price": 120.99,
+        "name": "Razer keyboard",
+        "description": "Very good",
+        "details": {
+            "Brand": "Rzer",
+            "Color": "black and green"
+        },
+        "id": 21,
+        "productType": "Keyboard"
     }
 ]
