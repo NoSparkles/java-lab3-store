@@ -39,6 +39,8 @@ public class CheckoutController {
     private ChoiceBox<String> paymentMethod;
     @FXML
     private TextField quantity;
+    @FXML
+    private Label orderDescription;
 
     private Product product;
 
@@ -113,6 +115,7 @@ public class CheckoutController {
         this.name.setText(this.product.getName());
         this.price.setText(String.valueOf(this.product.getPrice()));
         this.description.setText(this.product.getDescription());
+        this.adjustOrder();
     }
 
     private void adjustOrder() {
@@ -132,8 +135,7 @@ public class CheckoutController {
             order = new Customization(order);
         }
 
-        System.out.println("Order Description:");
-        System.out.println(order.getDescription());
+        this.orderDescription.setText(order.getDescription());
         this.price.setText(String.valueOf(Math.round(order.getCost() * 100.0) / 100.0));
     }
 }

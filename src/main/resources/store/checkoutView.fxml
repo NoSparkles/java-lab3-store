@@ -62,6 +62,11 @@
                   <TextField fx:id="quantity" onKeyTyped="#quntityOnTyped" prefHeight="25.0" prefWidth="54.0" />
                </children>
             </HBox>
+            <Label fx:id="orderDescription" text="order description" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
             <Button mnemonicParsing="false" text="Buy" />
          </children>
          <opaqueInsets>
