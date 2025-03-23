@@ -116,7 +116,7 @@ public class CheckoutController {
     }
 
     private void adjustOrder() {
-        int quantityInt = 1;
+        int quantityInt;
         if (this.quantity.getText().length() == 0) {
             quantityInt = 1;
         }
