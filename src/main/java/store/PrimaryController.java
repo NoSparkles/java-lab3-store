@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import store.product.Product;
 import store.product.ProductInventory;
+import store.product.ProductObserver;
 
 public class PrimaryController {
     @FXML
@@ -21,8 +22,11 @@ public class PrimaryController {
     @FXML
     private Button addProductButton;
     @FXML
+    private Label observerFeedbackLabel;
+    @FXML
     private GridPane productGrid;
 
+    private final ProductObserver observer = ProductObserver.getInstance();
     private final ProductInventory inventory = ProductInventory.getInstance();
     private List<Product> products;
 
@@ -32,6 +36,17 @@ public class PrimaryController {
     @FXML
     public void initialize() {
         this.restoreState();
+
+        int newProductsCount = this.observer.getProductCount();
+
+        System.out.println("count: " + newProductsCount);
+        if (newProductsCount == 0) {
+            this.observerFeedbackLabel.setText("");
+        }
+        else {
+            this.observerFeedbackLabel.setText("Number of products added recently: " + newProductsCount);
+        }
+        this.observer.resetProductCount();
 
         try {
             // Load the products from JSON

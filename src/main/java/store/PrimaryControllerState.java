@@ -20,7 +20,7 @@ public class PrimaryControllerState {
 
     // Getter and Setter for isAdmin
     public boolean isAdmin() {
-        return isAdmin;
+        return this.isAdmin;
     }
 
     public void setAdmin(boolean admin) {

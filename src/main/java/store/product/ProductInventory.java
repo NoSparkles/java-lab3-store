@@ -25,10 +25,10 @@ public class ProductInventory {
     }
 
     public static synchronized ProductInventory getInstance() {
-        if (instance == null) {
-            instance = new ProductInventory();
+        if (ProductInventory.instance == null) {
+            ProductInventory.instance = new ProductInventory();
         }
-        return instance;
+        return ProductInventory.instance;
     }
 
     // Ensure the JSON file exists
@@ -135,7 +135,6 @@ public class ProductInventory {
             try (FileWriter writer = new FileWriter(filePath, StandardCharsets.UTF_8)) {
                 writer.write(jsonArray.toString(4)); // Pretty print with 4-space indentation
             }
-
         } catch (Exception e) {
             System.err.println("Failed to add product: " + e.getMessage());
         }

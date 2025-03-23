@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import store.product.Product;
 import store.product.ProductFactory;
 import store.product.ProductInventory;
+import store.product.ProductObserver;
 
 public class CreatingProductController {
     @FXML
@@ -38,6 +39,7 @@ public class CreatingProductController {
     @FXML
     private Button createButton;
 
+    private final ProductObserver observer = ProductObserver.getInstance();
     private final ProductInventory inventory = ProductInventory.getInstance();
 
     @FXML
@@ -213,14 +215,8 @@ public class CreatingProductController {
             this.textFieldDetails2.getText()
         );
 
-
-        System.out.println(product.getName());
-        System.out.println(product.getProductType());
-        System.out.println(product.getPrice());
-        System.out.println(product.getDescription());
-        System.out.println(product.getDetails());
-
         this.inventory.addProductToJson(product);
+        this.observer.productAdded();
     }
 
     void setTextFieldDefaultValue(TextField textField, String value) {
