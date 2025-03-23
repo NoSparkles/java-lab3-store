@@ -405,5 +405,38 @@
         },
         "id": 72,
         "productType": "Keyboard"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Material": "-"
+        },
+        "id": 75,
+        "productType": "MousePad"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "0"
+        },
+        "id": 76,
+        "productType": "Mouse"
+    },
+    {
+        "price": 0.01,
+        "name": "Unknown",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "43423"
+        },
+        "id": 77,
+        "productType": "Mouse"
     }
 ]

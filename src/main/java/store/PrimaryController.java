@@ -78,6 +78,22 @@ public class PrimaryController {
                 this.changeToCheckoutView(product);
             });        
 
+            // Set a default transparent border
+            productBox.setStyle("-fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 5;");
+
+            // Change border color on hover
+            productBox.setOnMouseEntered(event -> {
+                productBox.setStyle("-fx-border-color: gray; -fx-border-width: 2; -fx-padding: 5;");
+                productBox.setCursor(javafx.scene.Cursor.HAND);
+            });
+
+            productBox.setOnMouseExited(event -> {
+                productBox.setStyle("-fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 5;");
+                productBox.setCursor(javafx.scene.Cursor.DEFAULT);
+            });
+
+
+
             // Add the VBox to the GridPane
             productGrid.add(productBox, column, row);
 
