@@ -438,5 +438,16 @@
         },
         "id": 77,
         "productType": "Mouse"
+    },
+    {
+        "price": 0.01,
+        "name": "hiiii",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Color": "-"
+        },
+        "id": 81,
+        "productType": "Keyboard"
     }
 ]

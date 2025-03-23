@@ -1,11 +1,8 @@
 package store.product;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -14,14 +11,11 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import store.App;
-
 public class ProductInventory {
     private static ProductInventory instance;
     private final String filePath = "products.json"; // Writable file path
 
     private ProductInventory() {
-        initializeFile();
     }
 
     public static synchronized ProductInventory getInstance() {
@@ -29,26 +23,6 @@ public class ProductInventory {
             ProductInventory.instance = new ProductInventory();
         }
         return ProductInventory.instance;
-    }
-
-    // Ensure the JSON file exists
-    private void initializeFile() {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            try (InputStream resourceStream = App.class.getResourceAsStream("/store/product/products.json");
-                 FileOutputStream outputStream = new FileOutputStream(file)) {
-                if (resourceStream == null) {
-                    throw new IllegalArgumentException("Resource file not found!");
-                }
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = resourceStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            } catch (Exception e) {
-                System.err.println("Failed to initialize file: " + e.getMessage());
-            }
-        }
     }
 
     // Load products from JSON file
