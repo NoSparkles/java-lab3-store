@@ -449,5 +449,38 @@
         },
         "id": 81,
         "productType": "Keyboard"
+    },
+    {
+        "price": 233,
+        "name": "fdsfsad",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "0"
+        },
+        "id": 83,
+        "productType": "Mouse"
+    },
+    {
+        "price": 233,
+        "name": "fdsfgdsfgdfgdfgsd",
+        "description": "-",
+        "details": {
+            "Type": "-",
+            "DPI": "0"
+        },
+        "id": 84,
+        "productType": "Mouse"
+    },
+    {
+        "price": 233,
+        "name": "gdfsgdfsgdsfg",
+        "description": "-",
+        "details": {
+            "Brand": "-",
+            "Material": "-"
+        },
+        "id": 85,
+        "productType": "MousePad"
     }
 ]
